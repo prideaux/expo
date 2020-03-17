@@ -1,0 +1,1 @@
+../../../SDWebImageSVGKitPlugin/SDWebImageSVGKitPlugin/Classes/SDWebImageSVGKitDefine.h

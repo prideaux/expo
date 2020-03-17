@@ -32,6 +32,14 @@ CACHE_KEYS:
     PROJECT_NAME: boost-for-react-native
     SPECS:
       - boost-for-react-native (1.63.0)
+  CocoaLumberjack:
+    BUILD_SETTINGS_CHECKSUM:
+      CocoaLumberjack: 3a69facfbf0b2466e4b5a52f682d7495
+    CHECKSUM: b17ae15142558d08bbacf69775fa10c4abbebcc9
+    PROJECT_NAME: CocoaLumberjack
+    SPECS:
+      - CocoaLumberjack (3.6.1)
+      - CocoaLumberjack/Core (3.6.1)
   DoubleConversion:
     BUILD_SETTINGS_CHECKSUM:
       DoubleConversion: 00ad3596e935bcd21487033fc301bf91
@@ -605,8 +613,8 @@ CACHE_KEYS:
       - EXPermissions (8.1.0)
   expo-image:
     BUILD_SETTINGS_CHECKSUM:
-      expo-image: bcbb57a3ee11d42bb8c5a75d69a0418f
-    CHECKSUM: 36f53fe2845e4bb74021f69192a752db29766897
+      expo-image: 87c69e5c89b718304065a7cab6d35fa2
+    CHECKSUM: 2dfa2a0c34a770823ab105e14bb284466cbce4aa
     FILES:
       - "../../../../packages/expo-image/ios/EXImageTypes.h"
       - "../../../../packages/expo-image/ios/EXImageTypes.m"
@@ -948,12 +956,12 @@ CACHE_KEYS:
       - nanopb/encode (0.3.9011)
   Pods-BareExpo:
     BUILD_SETTINGS_CHECKSUM:
-      Debug: 816f15a05b128cfbab101cc7184d9687
-      Release: 816f15a05b128cfbab101cc7184d9687
+      Debug: 563d76496bcf08bf5f4c79f7491cdc75
+      Release: 563d76496bcf08bf5f4c79f7491cdc75
   Pods-BareExpoTests:
     BUILD_SETTINGS_CHECKSUM:
-      Debug: e6aedfaad570c1e1a2e18b3c4a18be48
-      Release: e6aedfaad570c1e1a2e18b3c4a18be48
+      Debug: c9a85dde97165fdd0d20990fde4e0ada
+      Release: c9a85dde97165fdd0d20990fde4e0ada
   RCTRequired:
     BUILD_SETTINGS_CHECKSUM:
       RCTRequired: 4dfdb65505e509cfb5f433fb54943666
@@ -1844,6 +1852,20 @@ CACHE_KEYS:
     SPECS:
       - SDWebImage (5.6.0)
       - SDWebImage/Core (5.6.0)
+  SDWebImageSVGKitPlugin:
+    BUILD_SETTINGS_CHECKSUM:
+      SDWebImageSVGKitPlugin: 2507d73f4aede626a34e7d7513b5ea3c
+    CHECKSUM: 06a811c05b9e839982baeb5251d15fe7a79abb82
+    PROJECT_NAME: SDWebImageSVGKitPlugin
+    SPECS:
+      - SDWebImageSVGKitPlugin (1.2.0)
+  SVGKit:
+    BUILD_SETTINGS_CHECKSUM:
+      SVGKit: ce7e780021538645de9d3457e1c9ca7c
+    CHECKSUM: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
+    PROJECT_NAME: SVGKit
+    SPECS:
+      - SVGKit (2.1.1)
   UMAppLoader:
     BUILD_SETTINGS_CHECKSUM:
       UMAppLoader: 0019ffa67746bf7027b41c8c38d61f4a
@@ -1969,7 +1991,7 @@ CACHE_KEYS:
   UMReactNativeAdapter:
     BUILD_SETTINGS_CHECKSUM:
       UMReactNativeAdapter: 330db6c6bc97064a0ce907ee8d5fdbb2
-    CHECKSUM: c8f2b8beb61851b6f2441e54b409d2dbd6478b7d
+    CHECKSUM: 900e80a6cd83823870cf840f35081edb4043b014
     FILES:
       - "../../../../packages/@unimodules/react-native-adapter/ios/UMReactNativeAdapter/Services/UMReactFontManager.h"
       - "../../../../packages/@unimodules/react-native-adapter/ios/UMReactNativeAdapter/Services/UMReactFontManager.m"
@@ -1992,7 +2014,7 @@ CACHE_KEYS:
       - "../../../../packages/@unimodules/react-native-adapter/ios/UMReactNativeAdapter/UMViewManagerAdapter/UMViewManagerAdapter.m"
     PROJECT_NAME: UMReactNativeAdapter
     SPECS:
-      - UMReactNativeAdapter (5.1.0)
+      - UMReactNativeAdapter (5.1.1)
   UMSensorsInterface:
     BUILD_SETTINGS_CHECKSUM:
       UMSensorsInterface: edab35b62745c17864e65b8dd2612597

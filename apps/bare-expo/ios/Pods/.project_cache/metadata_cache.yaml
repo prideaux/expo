@@ -14,6 +14,10 @@ boost-for-react-native:
   LABEL: boost-for-react-native
   PROJECT_PATH: boost-for-react-native.xcodeproj
   UUID: AA4CE39926C0C12D02F874C1C48A5710
+CocoaLumberjack:
+  LABEL: CocoaLumberjack
+  PROJECT_PATH: CocoaLumberjack.xcodeproj
+  UUID: 85392ABCB5967FC7F189FA544F4E883D
 DoubleConversion:
   LABEL: DoubleConversion
   PROJECT_PATH: DoubleConversion.xcodeproj
@@ -230,10 +234,6 @@ EXTaskManager:
   LABEL: EXTaskManager
   PROJECT_PATH: EXTaskManager.xcodeproj
   UUID: 86D546D1F048CDA66BE7589194F91D23
-EXUpdates:
-  LABEL: EXUpdates
-  PROJECT_PATH: EXUpdates.xcodeproj
-  UUID: 076FF2640FFF3466FB36FD12A629113A
 EXWebBrowser:
   LABEL: EXWebBrowser
   PROJECT_PATH: EXWebBrowser.xcodeproj
@@ -426,6 +426,14 @@ SDWebImage:
   LABEL: SDWebImage
   PROJECT_PATH: SDWebImage.xcodeproj
   UUID: 4ECF4E662EEBE4FA58102FF984D920CC
+SDWebImageSVGKitPlugin:
+  LABEL: SDWebImageSVGKitPlugin
+  PROJECT_PATH: SDWebImageSVGKitPlugin.xcodeproj
+  UUID: FA58565F770339D4895C202AB5B30D4E
+SVGKit:
+  LABEL: SVGKit
+  PROJECT_PATH: SVGKit.xcodeproj
+  UUID: 1A3836177B5D4E99F4E935D1479ECB0C
 UMAppLoader:
   LABEL: UMAppLoader
   PROJECT_PATH: UMAppLoader.xcodeproj

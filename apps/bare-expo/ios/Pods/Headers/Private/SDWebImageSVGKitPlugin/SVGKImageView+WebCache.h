@@ -1,0 +1,1 @@
+../../../SDWebImageSVGKitPlugin/SDWebImageSVGKitPlugin/Classes/SVGKImageView+WebCache.h
