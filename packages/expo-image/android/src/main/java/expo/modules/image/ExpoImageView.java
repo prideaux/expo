@@ -16,6 +16,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import expo.modules.image.events.ImageLoadEventsManager;
 import expo.modules.image.okhttp.OkHttpClientProgressInterceptor;
 import expo.modules.image.enums.ImageResizeMode;
+import expo.modules.image.svg.SVGSoftwareLayerSetter;
 
 @SuppressLint("ViewConstructor")
 public class ExpoImageView extends AppCompatImageView {
@@ -67,6 +68,7 @@ public class ExpoImageView extends AppCompatImageView {
           .load(sourceToLoad)
           .apply(options)
           .listener(eventsManager)
+          .addListener(new SVGSoftwareLayerSetter())
           .into(this);
       mRequestManager
           .as(BitmapFactory.Options.class)
