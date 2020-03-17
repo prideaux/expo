@@ -10,6 +10,7 @@ const images = {
   uri_jpg: { uri: 'https://docs.expo.io/static/images/flappy_00.jpg' },
   uri_gif: { uri: 'https://docs.expo.io/static/images/flappy_03.gif' },
   uri_ico: { uri: 'https://docs.expo.io/static/images/favicon.ico' },
+  uri_svg: { uri: 'https://reactnative.dev/img/homepage/cross-platform.svg' },
 };
 
 export default images;
