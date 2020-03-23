@@ -8,7 +8,6 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.modules.network.ProgressListener;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import androidx.annotation.Nullable;
@@ -16,7 +15,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import expo.modules.image.events.ImageLoadEventsManager;
 import expo.modules.image.okhttp.OkHttpClientProgressInterceptor;
 import expo.modules.image.enums.ImageResizeMode;
-import expo.modules.image.svg.SVGSoftwareLayerSetter;
 
 @SuppressLint("ViewConstructor")
 public class ExpoImageView extends AppCompatImageView {
@@ -67,11 +65,13 @@ public class ExpoImageView extends AppCompatImageView {
       mRequestManager
           .load(sourceToLoad)
           .apply(options)
-          .listener(eventsManager)
-          .addListener(new SVGSoftwareLayerSetter())
+          .addListener(eventsManager)
           .into(this);
       mRequestManager
           .as(BitmapFactory.Options.class)
+          // Remove the SVGSoftwareLayerSetter
+          // since we don't need it here
+          .listener(null)
           .load(sourceToLoad)
           .into(eventsManager);
     }

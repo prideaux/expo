@@ -21,6 +21,7 @@ import expo.modules.image.events.ImageLoadEvent;
 import expo.modules.image.events.ImageLoadStartEvent;
 import expo.modules.image.events.ImageProgressEvent;
 import expo.modules.image.okhttp.OkHttpClientProgressInterceptor;
+import expo.modules.image.svg.SVGSoftwareLayerSetter;
 
 public class ExpoImageViewManager extends SimpleViewManager<ExpoImageView> {
   private static final String REACT_CLASS = "ExpoImage";
@@ -29,7 +30,7 @@ public class ExpoImageViewManager extends SimpleViewManager<ExpoImageView> {
   private OkHttpClientProgressInterceptor mProgressInterceptor;
 
   public ExpoImageViewManager(ReactApplicationContext applicationContext) {
-    mRequestManager = Glide.with(applicationContext);
+    mRequestManager = Glide.with(applicationContext).addDefaultRequestListener(new SVGSoftwareLayerSetter());
     mProgressInterceptor = OkHttpClientProgressInterceptor.getInstance();
   }
 
