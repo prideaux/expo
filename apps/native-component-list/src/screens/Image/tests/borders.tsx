@@ -190,6 +190,30 @@ const imageTests: ImageTestGroup = {
         },
       }),
     },
+    {
+      name: 'Start border (left on non RTL)',
+      props: ({ range }: ImageTestPropsFnInput) => ({
+        source: images.require_jpg1,
+        style: {
+          borderStartWidth: range(0, 25),
+          borderStartColor: tintColor,
+          borderTopStartRadius: 10,
+          borderBottomStartRadius: 10,
+        },
+      }),
+    },
+    {
+      name: 'End border (right on non RTL)',
+      props: ({ range }: ImageTestPropsFnInput) => ({
+        source: images.require_jpg1,
+        style: {
+          borderEndWidth: range(0, 25),
+          borderEndColor: tintColor,
+          borderTopEndRadius: 10,
+          borderBottomEndRadius: 10,
+        },
+      }),
+    },
   ],
 };
 
