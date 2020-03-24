@@ -65,6 +65,39 @@ public class ExpoImageView extends AppCompatImageView {
     // TODO: repeat mode handling
   }
 
+  void setBorderRadius(int position, float borderRadius) {
+    boolean isInvalidated = mOutlineProvider.setBorderRadius(borderRadius, position);
+    if (isInvalidated) {
+      invalidateOutline();
+      if (!mOutlineProvider.hasEqualCorners()) {
+        invalidate();
+      }
+    }
+
+    // Setting the border-radius doesn't necessarily mean that a border
+    // should to be drawn. Only update the border-drawable when needed.
+    if (mBorderDrawable != null) {
+      borderRadius = !YogaConstants.isUndefined(borderRadius) ? PixelUtil.toPixelFromDIP(borderRadius) : borderRadius;
+      if (position == 0) {
+        mBorderDrawable.setRadius(borderRadius);
+      } else {
+        mBorderDrawable.setRadius(borderRadius, position - 1);
+      }
+    }
+  }
+
+  void setBorderWidth(int position, float width) {
+    getOrCreateBorderDrawable().setBorderWidth(position, width);
+  }
+
+  void setBorderColor(int position, float rgb, float alpha) {
+    getOrCreateBorderDrawable().setBorderColor(position, rgb, alpha);
+  }
+
+  void setBorderStyle(@Nullable String style) {
+    getOrCreateBorderDrawable().setBorderStyle(style);
+  }
+
   /* package */ void onAfterUpdateTransaction() {
     GlideUrl sourceToLoad = createUrlFromSourceMap(mSourceMap);
 
@@ -120,27 +153,6 @@ public class ExpoImageView extends AppCompatImageView {
     return options;
   }
 
-  public void setBorderRadius(int position, float borderRadius) {
-    boolean isInvalidated = mOutlineProvider.setBorderRadius(borderRadius, position);
-    if (isInvalidated) {
-      invalidateOutline();
-      if (!mOutlineProvider.hasEqualCorners()) {
-        invalidate();
-      }
-    }
-
-    // Setting the border-radius doesn't necessarily mean that a border
-    // should to be drawn. Only update the border-drawable when needed.
-    if (mBorderDrawable != null) {
-      borderRadius = !YogaConstants.isUndefined(borderRadius) ? PixelUtil.toPixelFromDIP(borderRadius) : borderRadius;
-      if (position == 0) {
-        mBorderDrawable.setRadius(borderRadius);
-      } else {
-        mBorderDrawable.setRadius(borderRadius, position - 1);
-      }
-    }
-  }
-
   private BorderDrawable getOrCreateBorderDrawable() {
     if (mBorderDrawable == null) {
       mBorderDrawable = new BorderDrawable(getContext());
@@ -159,28 +171,22 @@ public class ExpoImageView extends AppCompatImageView {
     return mBorderDrawable;
   }
 
+  // Drawing overrides
+
   @Override
-  public void invalidateDrawable(@NonNull Drawable dr) {
-    super.invalidateDrawable(dr);
-    if (dr == mBorderDrawable) {
+  public void invalidateDrawable(@NonNull Drawable drawable) {
+    super.invalidateDrawable(drawable);
+    if (drawable == mBorderDrawable) {
       invalidate();
     }
   }
 
-  public void setBorderWidth(int position, float width) {
-    getOrCreateBorderDrawable().setBorderWidth(position, width);
-  }
-
-  public void setBorderColor(int position, float rgb, float alpha) {
-    getOrCreateBorderDrawable().setBorderColor(position, rgb, alpha);
-  }
-
-  public void setBorderStyle(@Nullable String style) {
-    getOrCreateBorderDrawable().setBorderStyle(style);
-  }
-
   @Override
   public void draw(Canvas canvas) {
+
+    // When the border-radii are not all the same, a convex-path
+    // is used for the Outline. Unfortunately clipping is not supported
+    // for convex-paths and we fallback to Canvas clipping.
     mOutlineProvider.clipCanvasIfNeeded(canvas, this);
     super.draw(canvas);
   }
