@@ -209,7 +209,19 @@ static NSString * const sourceHeightKey = @"height";
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor
 {
-  _imageView.backgroundColor = backgroundColor;
+  if (![_imageView.backgroundColor isEqual:backgroundColor]) {
+    _imageView.backgroundColor = backgroundColor;
+    [self.layer setNeedsDisplay];
+  }
+}
+
+- (void)reactSetFrame:(CGRect)frame
+{
+  CGSize oldSize = self.bounds.size;
+  [super reactSetFrame:frame];
+  if (!CGSizeEqualToSize(self.bounds.size, oldSize)) {
+    [self.layer setNeedsDisplay];
+  }
 }
 
 - (void)displayLayer:(CALayer *)layer
@@ -223,6 +235,7 @@ static NSString * const sourceHeightKey = @"height";
   EXImageCornerRadii cornerRadii = EXImageCornerRadiiResolve(_cornerRadii, _reactLayoutDirection, swapLeftRightInRTL, bounds.size);
   EXImageBorders borders = EXImageBordersResolve(_borders, _reactLayoutDirection, swapLeftRightInRTL);
   
+  [self updateShadowPathForCornerRadii:cornerRadii bounds:bounds];
   [self updateClipMaskForCornerRadii:cornerRadii bounds:bounds];
   [self updateBorderLayersForBorders:borders cornerRadii:cornerRadii bounds:bounds];
 }
@@ -310,6 +323,20 @@ borderRadius(BottomEnd, bottomEnd)
   _imageView.layer.cornerRadius = cornerRadius;
   _imageView.layer.mask = mask;
   _imageView.layer.masksToBounds = YES;
+}
+
+- (void)updateShadowPathForCornerRadii:(EXImageCornerRadii)cornerRadii bounds:(CGRect)bounds
+{
+  BOOL hasShadow = self.layer.shadowOpacity * CGColorGetAlpha(self.layer.shadowColor) > 0;
+  if (!hasShadow) {
+    self.layer.shadowPath = nil;
+    return;
+  }
+  
+  RCTCornerInsets cornerInsets = EXImageGetCornerInsets(cornerRadii, UIEdgeInsetsZero);
+  CGPathRef path = RCTPathCreateWithRoundedRect(bounds, cornerInsets, NULL);
+  self.layer.shadowPath = path;
+  CGPathRelease(path);
 }
 
 
