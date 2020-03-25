@@ -146,6 +146,19 @@ const imageTests: ImageTestGroup = {
       }),
     },
     {
+      name: 'Exclude border',
+      props: ({ range }: ImageTestPropsFnInput) => ({
+        source: images.require_jpg1,
+        style: {
+          borderWidth: 12,
+          borderColor: tintColor,
+          borderRadius: 20,
+          borderBottomWidth: 0,
+          borderBottomLeftRadius: 0,
+        },
+      }),
+    },
+    {
       name: 'Different colors',
       props: ({ range }: ImageTestPropsFnInput) => ({
         source: images.require_jpg1,
