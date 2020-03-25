@@ -12,36 +12,31 @@
 
 @interface EXImageView : UIView
 
+#pragma mark - Events
+
 @property (nonatomic, copy) RCTDirectEventBlock onLoadStart;
 @property (nonatomic, copy) RCTDirectEventBlock onProgress;
 @property (nonatomic, copy) RCTDirectEventBlock onError;
 @property (nonatomic, copy) RCTDirectEventBlock onLoad;
 
-- (instancetype)initWithBridge:(RCTBridge *)bridge NS_DESIGNATED_INITIALIZER;
 
-- (void)setSource:(NSDictionary *)sourceMap;
-- (void)setResizeMode:(RCTResizeMode)resizeMode;
-
-- (void)didSetProps:(NSArray<NSString *> *)changedProps;
+#pragma mark - Layout
 
 @property (nonatomic, assign) UIUserInterfaceLayoutDirection reactLayoutDirection;
 
-/**
- * Border radii.
- */
-@property (nonatomic, copy) NSNumber *borderRadius;
-@property (nonatomic, copy) NSNumber *borderTopLeftRadius;
-@property (nonatomic, copy) NSNumber *borderTopRightRadius;
-@property (nonatomic, copy) NSNumber *borderTopStartRadius;
-@property (nonatomic, copy) NSNumber *borderTopEndRadius;
-@property (nonatomic, copy) NSNumber *borderBottomLeftRadius;
-@property (nonatomic, copy) NSNumber *borderBottomRightRadius;
-@property (nonatomic, copy) NSNumber *borderBottomStartRadius;
-@property (nonatomic, copy) NSNumber *borderBottomEndRadius;
 
-/**
- * Border colors (actually retained).
- */
+#pragma mark - Borders
+
+@property (nonatomic, assign) CGFloat borderRadius;
+@property (nonatomic, assign) CGFloat borderTopLeftRadius;
+@property (nonatomic, assign) CGFloat borderTopRightRadius;
+@property (nonatomic, assign) CGFloat borderTopStartRadius;
+@property (nonatomic, assign) CGFloat borderTopEndRadius;
+@property (nonatomic, assign) CGFloat borderBottomLeftRadius;
+@property (nonatomic, assign) CGFloat borderBottomRightRadius;
+@property (nonatomic, assign) CGFloat borderBottomStartRadius;
+@property (nonatomic, assign) CGFloat borderBottomEndRadius;
+
 @property (nonatomic, assign) CGColorRef borderTopColor;
 @property (nonatomic, assign) CGColorRef borderRightColor;
 @property (nonatomic, assign) CGColorRef borderBottomColor;
@@ -50,20 +45,14 @@
 @property (nonatomic, assign) CGColorRef borderEndColor;
 @property (nonatomic, assign) CGColorRef borderColor;
 
-/**
- * Border widths.
- */
-@property (nonatomic, copy) NSNumber *borderTopWidth;
-@property (nonatomic, copy) NSNumber *borderRightWidth;
-@property (nonatomic, copy) NSNumber *borderBottomWidth;
-@property (nonatomic, copy) NSNumber *borderLeftWidth;
-@property (nonatomic, copy) NSNumber *borderStartWidth;
-@property (nonatomic, copy) NSNumber *borderEndWidth;
-@property (nonatomic, copy) NSNumber *borderWidth;
+@property (nonatomic, assign) CGFloat borderTopWidth;
+@property (nonatomic, assign) CGFloat borderRightWidth;
+@property (nonatomic, assign) CGFloat borderBottomWidth;
+@property (nonatomic, assign) CGFloat borderLeftWidth;
+@property (nonatomic, assign) CGFloat borderStartWidth;
+@property (nonatomic, assign) CGFloat borderEndWidth;
+@property (nonatomic, assign) CGFloat borderWidth;
 
-/**
- * Border styles.
- */
 @property (nonatomic, assign) RCTBorderStyle borderTopStyle;
 @property (nonatomic, assign) RCTBorderStyle borderRightStyle;
 @property (nonatomic, assign) RCTBorderStyle borderBottomStyle;
@@ -71,5 +60,15 @@
 @property (nonatomic, assign) RCTBorderStyle borderStartStyle;
 @property (nonatomic, assign) RCTBorderStyle borderEndStyle;
 @property (nonatomic, assign) RCTBorderStyle borderStyle;
+
+
+#pragma mark - Methods
+
+- (instancetype)initWithBridge:(RCTBridge *)bridge NS_DESIGNATED_INITIALIZER;
+
+- (void)setSource:(NSDictionary *)sourceMap;
+- (void)setResizeMode:(RCTResizeMode)resizeMode;
+
+- (void)didSetProps:(NSArray<NSString *> *)changedProps;
 
 @end

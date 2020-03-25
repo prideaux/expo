@@ -41,8 +41,7 @@ static NSString * const sourceHeightKey = @"height";
     _borders = EXImageBordersInit();
     _borderLayers = @{};
 
-    _imageView = [SDAnimatedImageView new];
-    _imageView.frame = self.bounds;
+    _imageView = [[SDAnimatedImageView alloc]initWithFrame:self.bounds];
     _imageView.contentMode = [EXImageTypes resizeModeToContentMode:_resizeMode];
     _imageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     _imageView.layer.masksToBounds = YES;
@@ -268,26 +267,29 @@ static NSString * const sourceHeightKey = @"height";
 
 #pragma mark - Border Radius
 
-#define setBorderRadius(side, var)                       \
--(void)setBorder##side##Radius : (NSNumber *)radius      \
+#define borderRadius(side, var)                          \
+-(CGFloat)border##side##Radius                           \
 {                                                        \
-CGFloat val = (radius != nil) ? radius.doubleValue : -1; \
-if (_cornerRadii.var == val) {                           \
+return _cornerRadii.var;                                 \
+}                                                        \
+-(void)setBorder##side##Radius : (CGFloat)radius         \
+{                                                        \
+if (_cornerRadii.var == radius) {                        \
 return;                                                  \
 }                                                        \
-_cornerRadii.var = val;                                  \
+_cornerRadii.var = radius;                               \
 [self.layer setNeedsDisplay];                            \
 }
 
-setBorderRadius(,all)
-setBorderRadius(TopLeft, topLeft)
-setBorderRadius(TopRight, topRight)
-setBorderRadius(TopStart, topStart)
-setBorderRadius(TopEnd, topEnd)
-setBorderRadius(BottomLeft, bottomLeft)
-setBorderRadius(BottomRight, bottomRight)
-setBorderRadius(BottomStart, bottomStart)
-setBorderRadius(BottomEnd, bottomEnd)
+borderRadius(,all)
+borderRadius(TopLeft, topLeft)
+borderRadius(TopRight, topRight)
+borderRadius(TopStart, topStart)
+borderRadius(TopEnd, topEnd)
+borderRadius(BottomLeft, bottomLeft)
+borderRadius(BottomRight, bottomRight)
+borderRadius(BottomStart, bottomStart)
+borderRadius(BottomEnd, bottomEnd)
 
 - (void)updateClipMaskForCornerRadii:(EXImageCornerRadii)cornerRadii bounds:(CGRect)bounds
 {
@@ -313,7 +315,11 @@ setBorderRadius(BottomEnd, bottomEnd)
 
 #pragma mark Border Color / Width / Style
 
-#define setBorder(side, var)                              \
+#define borderEdge(side, var)                             \
+-(CGColorRef)border##side##Color                          \
+{                                                         \
+return _borders.var.color;                                \
+}                                                         \
 -(void)setBorder##side##Color : (CGColorRef)color         \
 {                                                         \
 if (CGColorEqualToColor(_borders.var.color, color)) {     \
@@ -323,14 +329,21 @@ CGColorRelease(_borders.var.color);                       \
 _borders.var.color = CGColorRetain(color);                \
 [self.layer setNeedsDisplay];                             \
 }                                                         \
--(void)setBorder##side##Width : (NSNumber *)width         \
+-(CGFloat)border##side##Width                             \
 {                                                         \
-CGFloat val = (width != nil) ? width.doubleValue : -1;    \
-if (_borders.var.width == val) {                          \
+return _borders.var.width;                                \
+}                                                         \
+-(void)setBorder##side##Width : (CGFloat)width            \
+{                                                         \
+if (_borders.var.width == width) {                        \
 return;                                                   \
 }                                                         \
-_borders.var.width = val;                                 \
+_borders.var.width = width;                               \
 [self.layer setNeedsDisplay];                             \
+}                                                         \
+-(RCTBorderStyle)border##side##Style                      \
+{                                                         \
+return _borders.var.style;                                \
 }                                                         \
 -(void)setBorder##side##Style : (RCTBorderStyle)style     \
 {                                                         \
@@ -341,13 +354,13 @@ _borders.var.style = style;                               \
 [self.layer setNeedsDisplay];                             \
 }
 
-setBorder(,all)
-setBorder(Top,top)
-setBorder(Right,right)
-setBorder(Bottom,bottom)
-setBorder(Left,left)
-setBorder(Start,start)
-setBorder(End,end)
+borderEdge(,all)
+borderEdge(Top,top)
+borderEdge(Right,right)
+borderEdge(Bottom,bottom)
+borderEdge(Left,left)
+borderEdge(Start,start)
+borderEdge(End,end)
 
 - (void)updateBorderLayersForBorders:(EXImageBorders)borders cornerRadii:(EXImageCornerRadii)cornerRadii bounds:(CGRect)bounds
 {
